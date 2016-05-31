@@ -44,6 +44,9 @@ public class SnakeGame extends JPanel implements SnakeGameIfc {
 	private boolean playing;
 	private ControlPanel controlPanel = new ControlPanel(this);
 	private final SnakeKeypadListener keypad = new SnakeKeypadListener();
+	
+	private Target targetDoingStuff;
+	private Target targetAux;
 
 	public SnakeGame() {
 		addKeyListener(keypad);
@@ -404,6 +407,4 @@ public class SnakeGame extends JPanel implements SnakeGameIfc {
 		timerEvilSnakeMove.stop();
 	}
 
-	private Target targetDoingStuff;
-	private Target targetAux;
 }
