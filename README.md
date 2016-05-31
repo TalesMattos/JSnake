@@ -1,1 +1,1 @@
-# JSnake - teste
+# JSnake
