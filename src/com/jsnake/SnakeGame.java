@@ -83,9 +83,9 @@ public class SnakeGame extends JPanel implements TargetHitAction {
 		}
 		stopEvilSnake();
 		if (timerActionPerformed == null) {
-			timerActionPerformed = new Timer(controlPanel.getSnakeSpeed(), new ListenerGameVerifier());
+			timerActionPerformed = new Timer(controlPanel.getSnakeDelay(), new ListenerGameVerifier());
 		} else
-			timerActionPerformed.setDelay(controlPanel.getSnakeSpeed());
+			timerActionPerformed.setDelay(controlPanel.getSnakeDelay());
 		timerActionPerformed.start();
 	}
 	
@@ -141,6 +141,8 @@ public class SnakeGame extends JPanel implements TargetHitAction {
 			Toolkit.getDefaultToolkit().sync();
 			g.dispose();
 		} else {
+			targetAux = null;
+			targetDoingStuff = null;
 			controlPanel.gameOver(g);
 		}
 	}
@@ -173,9 +175,9 @@ public class SnakeGame extends JPanel implements TargetHitAction {
 		controlPanel.incrementCountHitTarget();
 		controlPanel.setScore(target.recalculateScore(controlPanel.getScore()));
 		controlPanel.setSnakeSize(target.resizeSnake(this.controlPanel.getSnakeSize()));
-		int speed;
-		timerActionPerformed.setDelay(speed = target.recalculateSpeed(this.timerActionPerformed.getDelay()));		
-		controlPanel.setSnakeSpeed(speed);
+		int delay;
+		timerActionPerformed.setDelay(delay = target.recalculateDelay(this.timerActionPerformed.getDelay()));		
+		controlPanel.setSnakeDelay(delay);
 	}
 	
 	private void moveSnake() {

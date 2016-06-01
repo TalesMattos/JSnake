@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.text.DecimalFormat;
 
 public class ControlPanel {
 
@@ -12,19 +13,19 @@ public class ControlPanel {
 	private int score;
 	private int countHitTarget;
 	private int snakeSize;
-	private int snakeSpeed;
+	private int snakeDelay;
 	private boolean superSnake;
 	
 	public ControlPanel() {
 		configure();
 	}
 	
-	public int getSnakeSpeed() {
-		return snakeSpeed;
+	public int getSnakeDelay() {
+		return snakeDelay;
 	}
 	
-	public void setSnakeSpeed(int snakeSpeed) {
-		this.snakeSpeed = snakeSpeed;
+	public void setSnakeDelay(int snakeDelay) {
+		this.snakeDelay = snakeDelay;
 	}
 	
 	public int getSnakeSize() {
@@ -52,7 +53,7 @@ public class ControlPanel {
 	}
 	
 	public void configure() {
-		snakeSpeed = JSnake.MIN_SPPED;
+		snakeDelay = JSnake.MAX_DELAY;
 		snakeSize = 3;
 		score = 0;
 		countHitTarget = 0;
@@ -71,7 +72,7 @@ public class ControlPanel {
 		String clockInfo = "Timer: " + timerClockIncrement.toString();
 		String scoreInfo = "Score: " + score; 
 		String countInfo = "Items: " + countHitTarget;
-		String speedInfo = "Speed: " + snakeSpeed;
+		String speedInfo = "Speed: " + (new DecimalFormat("000").format(((float)JSnake.MAX_DELAY / (float)snakeDelay) * 100)); //FIXME - melhorar 
 		String sizeInfo = "Size: " + snakeSize;
 		return new String[] {clockInfo, scoreInfo, speedInfo, sizeInfo, countInfo};
 	}

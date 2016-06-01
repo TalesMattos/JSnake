@@ -15,8 +15,8 @@ public class JSnake extends JFrame {
 	public static final int PANEL_HEIGHT = 400;
 	public static final int COORDINATE_SIZE = 10;
 	public static final int ALL_COORDINATES = (PANEL_WIDTH / COORDINATE_SIZE) * (PANEL_HEIGHT /COORDINATE_SIZE);
-	public static final int MIN_SPPED = 150;
-	public static final int MAX_SPPED = 20;
+	public static final int MAX_DELAY = 150;
+	public static final int MIN_DELAY = 20;
 	
 	public JSnake() {
 		add(new SnakeGame());

@@ -47,12 +47,12 @@ public abstract class Target {
 	protected abstract int timeDoStuffOnHit();
 	public abstract TargetType getTargetType();
 	
-	protected final boolean isMaxSpeed(int currentDelay) {
-		return currentDelay <= JSnake.MAX_SPPED;
+	protected final boolean isMinDelay(int currentDelay) {
+		return currentDelay <= JSnake.MIN_DELAY;
 	}
 
-	protected final boolean isMinSpeed(int currentDelay) {
-		return currentDelay >= JSnake.MIN_SPPED;
+	protected final boolean isMaxDelay(int currentDelay) {
+		return currentDelay >= JSnake.MAX_DELAY;
 	}
 	
 	public void stopTimerHitDoingStuff() {
@@ -100,23 +100,23 @@ public abstract class Target {
 	 * millisec - Se +(positivo) diminui a velocidade
 	 * 						Se -(negativo) aumenta a velocidade
 	 */
-	public final int recalculateSpeed(int currentDelay) {
-		int millisec = calcDelayOnHit();
-		if (millisec == 0)
+	public final int recalculateDelay(int currentDelay) {
+		int calcDelayOnHit = calcDelayOnHit();
+		if (calcDelayOnHit == 0)
 			return currentDelay;
-		if (millisec < 0) {
-			if (!isMaxSpeed(currentDelay)) {
-				if ((currentDelay + millisec) <= JSnake.MAX_SPPED)
-					currentDelay = JSnake.MAX_SPPED;
+		if (calcDelayOnHit < 0) {
+			if (!isMinDelay(currentDelay)) {
+				if ((currentDelay + calcDelayOnHit) <= JSnake.MIN_DELAY)
+					currentDelay = JSnake.MIN_DELAY;
 				else
-					currentDelay = currentDelay + millisec;
+					currentDelay = currentDelay + calcDelayOnHit;
 			}
-		} else if (millisec > 0) {
-			if (!isMinSpeed(currentDelay)) {
-				if ((currentDelay + millisec) >= JSnake.MIN_SPPED)
-					currentDelay = JSnake.MIN_SPPED;
+		} else if (calcDelayOnHit > 0) {
+			if (!isMaxDelay(currentDelay)) {
+				if ((currentDelay + calcDelayOnHit) >= JSnake.MAX_DELAY)
+					currentDelay = JSnake.MAX_DELAY;
 				else
-					currentDelay = currentDelay + millisec;
+					currentDelay = currentDelay + calcDelayOnHit;
 			}
 		}
 		return currentDelay;
