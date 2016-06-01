@@ -1,11 +1,8 @@
 package com.jsnake.target;
 
-import com.jsnake.SnakeGame;
 
-public interface TargetHitAction {
+public abstract interface TargetHitAction {
 
-	void addSnakeGameListener(SnakeGame listener);
-	void doStuff();
-	void undoStuff();
+	public abstract void changeSuperSnake(boolean superSnake);
 	
 }

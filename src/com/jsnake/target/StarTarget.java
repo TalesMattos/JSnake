@@ -1,12 +1,11 @@
 package com.jsnake.target;
 
-import com.jsnake.SnakeGame;
 
 
 public class StarTarget extends Target {
 
-	public StarTarget(SnakeGame listener) {
-		super.addSnakeGameListener(listener);
+	public StarTarget(TargetHitAction targetHitActionListener) {
+		super.addTargetHitActionListener(targetHitActionListener);
 	}
 	
 	@Override
@@ -39,13 +38,13 @@ public class StarTarget extends Target {
 	@Override
 	public void doStuff() {
 		super.doStuff();
-		listener.changeSuperSnake(true);
+		targetHitActionListener.changeSuperSnake(true);
 	}
 	
 	@Override
 	public void undoStuff() {
 		super.undoStuff();
-		listener.changeSuperSnake(false);
+		targetHitActionListener.changeSuperSnake(false);
 	}
 	
 	@Override

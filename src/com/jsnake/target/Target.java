@@ -9,9 +9,9 @@ import com.jsnake.ClockSecondsListener;
 import com.jsnake.JSnake;
 import com.jsnake.SnakeGame;
 
-public abstract class Target implements TargetHitAction {
+public abstract class Target {
 
-	protected SnakeGame listener;
+	protected TargetHitAction targetHitActionListener;
 	private int xCoordinate;
 	private int yCoordinate;
 	private boolean show = true;
@@ -148,19 +148,16 @@ public abstract class Target implements TargetHitAction {
 		}
 	}
 	
-	@Override
-	public void addSnakeGameListener(SnakeGame listener) {
-		this.listener = listener;
+	protected void addTargetHitActionListener(TargetHitAction targetHitActionListener) {
+		this.targetHitActionListener = targetHitActionListener;
 	}
 
-	@Override
-	public void doStuff() {
+	protected void doStuff() {
 		doingStuff = true;
 		//sobrescrever e implementar. chamar super
 	}
 	
-	@Override
-	public void undoStuff() {
+	protected void undoStuff() {
 		doingStuff = false;
 		//sobrescrever e implementar. chamar super
 	}

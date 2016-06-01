@@ -20,9 +20,10 @@ import com.jsnake.target.FlyTarget;
 import com.jsnake.target.SlowTarget;
 import com.jsnake.target.StarTarget;
 import com.jsnake.target.Target;
+import com.jsnake.target.TargetHitAction;
 
 
-public class SnakeGame extends JPanel {
+public class SnakeGame extends JPanel implements TargetHitAction {
 
 	private static final long serialVersionUID = 1L;
 
@@ -56,6 +57,7 @@ public class SnakeGame extends JPanel {
 		startGame();
 	}
 
+	@Override
 	public void changeSuperSnake(boolean superSnake) {
 		controlPanel.setSuperSnake(superSnake);
 		ImageIcon snakeBody = new ImageIcon(SnakeGame.class.getResource(superSnake ? "/body_super.png" : "/body.jpg"));
