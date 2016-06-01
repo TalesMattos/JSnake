@@ -1,6 +1,8 @@
 package com.jsnake;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -41,11 +43,11 @@ public class SnakeGame extends JPanel implements TargetHitAction {
 	private Image snakeBodyImage;
 	private Image snakeHeadImage;
 	private Timer timerActionPerformed;
-	private AbstractQueue<Target> targets = new ConcurrentLinkedQueue<Target>();
 	private boolean playing;
 	private ControlPanel controlPanel = new ControlPanel();
 	private final SnakeKeypadListener keypad = new SnakeKeypadListener();
 	
+	private AbstractQueue<Target> targets = new ConcurrentLinkedQueue<Target>();
 	private Target targetDoingStuff;
 	private Target targetAux;
 
@@ -122,7 +124,10 @@ public class SnakeGame extends JPanel implements TargetHitAction {
 			}
 			controlPanel.drawInfo(g);
 			if (targetAux != null && targetAux.timeAlive() > 0 && targetAux.isShow()) {
-				controlPanel.drawInfo(g, targetAux.getTargetType().name() + " " + targetAux.getClockSecondsKeepAlive().toString(), JSnake.PANEL_WIDTH - JSnake.COORDINATE_SIZE * 6, JSnake.COORDINATE_SIZE * 2);				
+				Font infoFont = new Font("Courrier", Font.BOLD, 12);
+				String info = targetAux.getTargetType().name() + " " + targetAux.getClockSecondsKeepAlive().toString();
+				FontMetrics infoMetric = g.getFontMetrics(infoFont);
+				controlPanel.drawInfo(g, info, (JSnake.PANEL_WIDTH - infoMetric.stringWidth(info)) - JSnake.COORDINATE_SIZE, JSnake.COORDINATE_SIZE * 2);				
 			}
 			if (targetDoingStuff != null && targetDoingStuff.isDoingStuff()) {
 				String label;
