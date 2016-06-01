@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.text.DecimalFormat;
 
 public class ControlPanel {
 
@@ -72,7 +71,7 @@ public class ControlPanel {
 		String clockInfo = "Timer: " + timerClockIncrement.toString();
 		String scoreInfo = "Score: " + score; 
 		String countInfo = "Items: " + countHitTarget;
-		String speedInfo = "Speed: " + (new DecimalFormat("000").format(((float)JSnake.MAX_DELAY / (float)snakeDelay) * 100)); //FIXME - melhorar 
+		String speedInfo = "Speed: " + ((JSnake.MAX_DELAY + JSnake.MIN_DELAY) - snakeDelay); 
 		String sizeInfo = "Size: " + snakeSize;
 		return new String[] {clockInfo, scoreInfo, speedInfo, sizeInfo, countInfo};
 	}
