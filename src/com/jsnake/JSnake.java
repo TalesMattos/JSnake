@@ -2,6 +2,11 @@ package com.jsnake;
 
 import javax.swing.JFrame;
 
+/**
+ * 
+ * @author tales-mattos (30/05/2016)
+ *
+ */
 public class JSnake extends JFrame {
 
 	private static final long serialVersionUID = 1L;
