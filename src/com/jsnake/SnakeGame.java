@@ -22,7 +22,7 @@ import com.jsnake.target.StarTarget;
 import com.jsnake.target.Target;
 
 
-public class SnakeGame extends JPanel implements SnakeGameIfc {
+public class SnakeGame extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -42,7 +42,7 @@ public class SnakeGame extends JPanel implements SnakeGameIfc {
 	private Timer timerActionPerformed;
 	private AbstractQueue<Target> targets = new ConcurrentLinkedQueue<Target>();
 	private boolean playing;
-	private ControlPanel controlPanel = new ControlPanel(this);
+	private ControlPanel controlPanel = new ControlPanel();
 	private final SnakeKeypadListener keypad = new SnakeKeypadListener();
 	
 	private Target targetDoingStuff;
@@ -85,15 +85,21 @@ public class SnakeGame extends JPanel implements SnakeGameIfc {
 		timerActionPerformed.start();
 	}
 	
-	@Override
-	public void startGame() {
+	private void startGame() {
 		configure();
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		controlPanel.sleepOnGameOver();
+		if (controlPanel.isDrawGameOver()) {
+			try {
+				Thread.sleep(4000);
+				this.startGame();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		if (playing) {
 			if (!targets.isEmpty()) {
 				for (Target tAux : targets) {

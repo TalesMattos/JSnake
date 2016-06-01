@@ -7,7 +7,6 @@ import java.awt.Graphics;
 
 public class ControlPanel {
 
-	private SnakeGameIfc snakeGameIfc;
 	private boolean drawGameOver;
 	private ClockSeconds timerClockIncrement;
 	private int score;
@@ -16,8 +15,7 @@ public class ControlPanel {
 	private int snakeSpeed;
 	private boolean superSnake;
 	
-	public ControlPanel(SnakeGameIfc snakeGameIfc) {
-		this.snakeGameIfc = snakeGameIfc;
+	public ControlPanel() {
 		configure();
 	}
 	
@@ -65,15 +63,8 @@ public class ControlPanel {
 		timerClockIncrement.stop();
 	}
 	
-	public void sleepOnGameOver() {
-		if (drawGameOver) {
-			try {
-				Thread.sleep(4000);
-				snakeGameIfc.startGame();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+	public boolean isDrawGameOver() {
+		return drawGameOver;
 	}
 	
 	private String[] getInfo() {
