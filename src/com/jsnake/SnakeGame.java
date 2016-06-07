@@ -17,6 +17,7 @@ import javax.swing.Timer;
 
 import com.jsnake.SnakeKeypadListener.KeypadSnake;
 import com.jsnake.target.AppleTarget;
+import com.jsnake.target.BombTarget;
 import com.jsnake.target.DecreaseTarget;
 import com.jsnake.target.FlyTarget;
 import com.jsnake.target.SlowTarget;
@@ -60,7 +61,7 @@ public class SnakeGame extends JPanel implements TargetHitAction {
 	}
 
 	@Override
-	public void changeSuperSnake(boolean superSnake) {
+	public void changeToSuperSnake(boolean superSnake) {
 		controlPanel.setSuperSnake(superSnake);
 		ImageIcon snakeBody = new ImageIcon(SnakeGame.class.getResource(superSnake ? "/body_super.png" : "/body.jpg"));
 		ImageIcon snakeHead = new ImageIcon(SnakeGame.class.getResource(superSnake ? "/head_super.png" : "/head.jpg"));
@@ -74,7 +75,7 @@ public class SnakeGame extends JPanel implements TargetHitAction {
 		keypad.configure();
 		snakeCoordinateX = new int[JSnake.ALL_COORDINATES];
 		snakeCoordinateY = new int[JSnake.ALL_COORDINATES];
-		changeSuperSnake(false);
+		changeToSuperSnake(false);
 		controlPanel.configure();
 		playing = true;
 		for (int i = 0; i < controlPanel.getSnakeSize(); i++) {
@@ -278,20 +279,20 @@ public class SnakeGame extends JPanel implements TargetHitAction {
 	private void checkHitBorder() {
 		for (int i = controlPanel.getSnakeSize(); i > 0; i--) {
 			if ((i > 4) && (snakeCoordinateX[0] == snakeCoordinateX[i]) && (snakeCoordinateY[0] == snakeCoordinateY[i])) {
-				playing = false;
+				doGameOver();
 			}
 		}
 		if (snakeCoordinateY[0] > JSnake.PANEL_HEIGHT) {
-			playing = false;
+			doGameOver();
 		}
 		if (snakeCoordinateY[0] < 0) {
-			playing = false;
+			doGameOver();
 		}
 		if (snakeCoordinateX[0] > JSnake.PANEL_WIDTH) {
-			playing = false;
+			doGameOver();
 		}
 		if (snakeCoordinateX[0] < 0) {
-			playing = false;
+			doGameOver();
 		}
 		
 	}
@@ -302,7 +303,7 @@ public class SnakeGame extends JPanel implements TargetHitAction {
 				if (controlPanel.isSuperSnake())
 					stopEvilSnake();
 				else
-					playing = false;
+					doGameOver();
 			}
 		}
 		for (int i = 0; i < controlPanel.getSnakeSize(); i++) {
@@ -310,7 +311,7 @@ public class SnakeGame extends JPanel implements TargetHitAction {
 				if (controlPanel.isSuperSnake())
 					stopEvilSnake();
 				else
-					playing = false;
+					doGameOver();
 			}
 		}
 	}
@@ -335,6 +336,7 @@ public class SnakeGame extends JPanel implements TargetHitAction {
 				newTargetAux = new StarTarget(this);			
 			}
 		}
+		newTargetAux = new BombTarget(this);
 		targetAux = newTargetAux;
 		if (newTargetAux != null)
 			addNewTarget(newTargetAux);
@@ -420,6 +422,11 @@ public class SnakeGame extends JPanel implements TargetHitAction {
 		showEvilSnake = false;
 		timerEvilSnakeChangeDirection.stop();
 		timerEvilSnakeMove.stop();
+	}
+	
+	@Override
+	public void doGameOver() {
+		playing = false;
 	}
 
 }

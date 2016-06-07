@@ -38,13 +38,13 @@ public class StarTarget extends Target {
 	@Override
 	public void doStuff() {
 		super.doStuff();
-		targetHitActionListener.changeSuperSnake(true);
+		targetHitActionListener.changeToSuperSnake(true);
 	}
 	
 	@Override
 	public void undoStuff() {
 		super.undoStuff();
-		targetHitActionListener.changeSuperSnake(false);
+		targetHitActionListener.changeToSuperSnake(false);
 	}
 	
 	@Override

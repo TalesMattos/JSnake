@@ -135,7 +135,8 @@ public abstract class Target {
 		SLOW("slow.png"),
 		DECREASE("decrease.jpg"), 
 		APPLE("apple.jpg"), 
-		FLY("fly.png");
+		FLY("fly.png"),
+		BOMB("bomb.png");
 		
 		private ImageIcon imgIcon;
 		
