@@ -334,9 +334,10 @@ public class SnakeGame extends JPanel implements TargetHitAction {
 				newTargetAux = new DecreaseTarget();			
 			} else if (controlPanel.getScore() >= 20 && controlPanel.getCountHitTarget() % 10 == 3) {
 				newTargetAux = new StarTarget(this);			
+			} else if (controlPanel.getCountHitTarget() % 2 == 1) {
+				newTargetAux = new BombTarget(this);				
 			}
 		}
-		newTargetAux = new BombTarget(this);
 		targetAux = newTargetAux;
 		if (newTargetAux != null)
 			addNewTarget(newTargetAux);
